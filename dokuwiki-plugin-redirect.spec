@@ -9,6 +9,7 @@ License:	GPL v2
 Group:		Applications/WWW
 Source0:	http://github.com/splitbrain/dokuwiki-plugin-%{plugin}/tarball/master#/%{plugin}-%{version}.tgz
 # Source0-md5:	8d5d6191b14ef16bc75975d1f206fa72
+Patch0:		confdir.patch
 URL:		http://www.dokuwiki.org/plugin:redirect
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
@@ -30,6 +31,7 @@ central configuration file.
 %prep
 %setup -qc
 mv *-%{plugin}-*/* .
+%patch0 -p1
 
 version=$(awk '/^date/{print $2}' plugin.info.txt)
 if [ "$(echo "$version" | tr -d -)" != %{version} ]; then

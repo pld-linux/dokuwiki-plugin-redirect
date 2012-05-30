@@ -1,0 +1,31 @@
+--- dokuwiki-plugin-redirect-20100613/action.php	2011-02-06 20:26:05.000000000 +0200
++++ dokuwiki-plugin-redirect-20100613/action.php	2012-05-30 16:28:11.153277934 +0300
+@@ -34,7 +34,7 @@
+ 
+         if($ACT != 'show') return;
+ 
+-        $redirects = confToHash(dirname(__FILE__).'/redirect.conf');
++        $redirects = confToHash(DOKU_CONF.'/redirect.conf');
+         if($redirects[$ID]){
+             if(preg_match('/^https?:\/\//',$redirects[$ID])){
+                 send_redirect($redirects[$ID]);
+--- dokuwiki-plugin-redirect-20100613/admin.php	2011-02-06 20:26:05.000000000 +0200
++++ dokuwiki-plugin-redirect-20100613/admin.php	2012-05-30 16:28:48.784865018 +0300
+@@ -37,7 +37,7 @@
+      */
+     function handle() {
+         if($_POST['redirdata']){
+-            if(io_saveFile(dirname(__FILE__).'/redirect.conf',$_POST['redirdata'])){
++            if(io_saveFile(DOKU_CONF.'/redirect.conf',$_POST['redirdata'])){
+                 msg($this->getLang('saved'),1);
+             }
+         }
+@@ -53,7 +53,7 @@
+         echo '<input type="hidden" name="do" value="admin" />';
+         echo '<input type="hidden" name="page" value="redirect" />';
+         echo '<textarea class="edit" rows="15" cols="80" style="height: 300px" name="redirdata">';
+-        echo formtext(io_readFile(dirname(__FILE__).'/redirect.conf'));
++        echo formtext(io_readFile(DOKU_CONF.'/redirect.conf'));
+         echo '</textarea><br />';
+         echo '<input type="submit" value="'.$lang['btn_save'].'" class="button" />';
+         echo '</form>';
