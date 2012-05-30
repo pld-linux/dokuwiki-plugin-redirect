@@ -43,6 +43,9 @@ install -d $RPM_BUILD_ROOT%{plugindir}
 cp -a . $RPM_BUILD_ROOT%{plugindir}
 %{__rm} $RPM_BUILD_ROOT%{plugindir}/README
 
+install -d $RPM_BUILD_ROOT%{dokuconf}
+touch $RPM_BUILD_ROOT%{dokuconf}/%{plugin}.conf
+
 %find_lang %{name}.lang
 
 %clean
@@ -51,6 +54,7 @@ rm -rf $RPM_BUILD_ROOT
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc README
+%attr(660,root,http) %config(noreplace) %verify(not md5 mtime size) %{dokuconf}/%{plugin}.conf
 %dir %{plugindir}
 %{plugindir}/*.php
 %{plugindir}/*.txt
