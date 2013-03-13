@@ -9,14 +9,14 @@
          if($redirects[$ID]){
              if(preg_match('/^https?:\/\//',$redirects[$ID])){
                  send_redirect($redirects[$ID]);
---- dokuwiki-plugin-redirect-20100613/admin.php	2011-02-06 20:26:05.000000000 +0200
-+++ dokuwiki-plugin-redirect-20100613/admin.php	2012-05-30 16:28:48.784865018 +0300
+--- dokuwiki-plugin-redirect-20120918/admin.php~	2012-09-18 21:46:55.000000000 +0300
++++ dokuwiki-plugin-redirect-20120918/admin.php	2012-09-18 21:47:33.419278055 +0300
 @@ -37,7 +37,7 @@
       */
      function handle() {
          if($_POST['redirdata']){
--            if(io_saveFile(dirname(__FILE__).'/redirect.conf',$_POST['redirdata'])){
-+            if(io_saveFile(DOKU_CONF.'/redirect.conf',$_POST['redirdata'])){
+-            if(io_saveFile(dirname(__FILE__).'/redirect.conf',cleanText($_POST['redirdata']))){
++            if(io_saveFile(DOKU_CONF.'/redirect.conf',cleanText($_POST['redirdata']))){
                  msg($this->getLang('saved'),1);
              }
          }

@@ -3,12 +3,13 @@
 %include	/usr/lib/rpm/macros.php
 Summary:	DokuWiki redirect plugin
 Name:		dokuwiki-plugin-%{plugin}
-Version:	20100613
-Release:	6
+Version:	20120918
+Release:	0.1
 License:	GPL v2
 Group:		Applications/WWW
-Source0:	http://github.com/splitbrain/dokuwiki-plugin-%{plugin}/tarball/master#/%{plugin}-%{version}.tgz
-# Source0-md5:	8d5d6191b14ef16bc75975d1f206fa72
+#Source0:	http://github.com/splitbrain/dokuwiki-plugin-%{plugin}/tarball/master#/%{plugin}-%{version}.tgz
+Source0:	https://github.com/glensc/dokuwiki-plugin-redirect/tarball/cleantext/#/%{plugin}-%{version}.tgz
+# Source0-md5:	e75c0f0462e790c4824125aca8e0b5fc
 Patch0:		confdir.patch
 URL:		http://www.dokuwiki.org/plugin:redirect
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
@@ -44,6 +45,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{plugindir}
 cp -a . $RPM_BUILD_ROOT%{plugindir}
 %{__rm} $RPM_BUILD_ROOT%{plugindir}/README
+%{__rm} $RPM_BUILD_ROOT%{plugindir}/*/.gitignore
 
 install -d $RPM_BUILD_ROOT%{dokuconf}
 touch $RPM_BUILD_ROOT%{dokuconf}/%{plugin}.conf
