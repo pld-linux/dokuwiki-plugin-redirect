@@ -1,20 +1,21 @@
+%define		subver	2017-03-08
+%define		ver		%(echo %{subver} | tr -d -)
 %define		plugin		redirect
-%define		php_min_version 5.0.0
+%define		php_min_version 5.3.0
 %include	/usr/lib/rpm/macros.php
 Summary:	DokuWiki redirect plugin
 Name:		dokuwiki-plugin-%{plugin}
-Version:	20120918
-Release:	0.1
+Version:	%{ver}
+Release:	1
 License:	GPL v2
 Group:		Applications/WWW
-#Source0:	http://github.com/splitbrain/dokuwiki-plugin-%{plugin}/tarball/master#/%{plugin}-%{version}.tgz
-Source0:	https://github.com/glensc/dokuwiki-plugin-redirect/tarball/cleantext/#/%{plugin}-%{version}.tgz
-# Source0-md5:	e75c0f0462e790c4824125aca8e0b5fc
+Source0:	https://github.com/splitbrain/dokuwiki-plugin-redirect/archive/%{subver}/%{plugin}-%{subver}.tar.gz
+# Source0-md5:	99a8d76dc828f9f0b6bf4b91d7bb0ab2
 Patch0:		confdir.patch
-URL:		http://www.dokuwiki.org/plugin:redirect
+URL:		https://www.dokuwiki.org/plugin:redirect
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
-Requires:	dokuwiki >= 20091225
+Requires:	dokuwiki >= 20131208
 Requires:	php(core) >= %{php_min_version}
 Requires:	php(pcre)
 BuildArch:	noarch
@@ -34,6 +35,7 @@ central configuration file.
 mv *-%{plugin}-*/* .
 %patch0 -p1
 
+%build
 version=$(awk '/^date/{print $2}' plugin.info.txt)
 if [ "$(echo "$version" | tr -d -)" != %{version} ]; then
 	: %%{version} mismatch
@@ -61,5 +63,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(660,root,http) %config(noreplace) %verify(not md5 mtime size) %{dokuconf}/%{plugin}.conf
 %dir %{plugindir}
 %{plugindir}/*.php
+%{plugindir}/*.svg
 %{plugindir}/*.txt
 %{plugindir}/conf
