@@ -1,4 +1,4 @@
-%define		subver	2017-03-08
+%define		subver	2017-11-05
 %define		ver		%(echo %{subver} | tr -d -)
 %define		plugin		redirect
 %define		php_min_version 5.3.0
@@ -10,8 +10,7 @@ Release:	1
 License:	GPL v2
 Group:		Applications/WWW
 Source0:	https://github.com/splitbrain/dokuwiki-plugin-redirect/archive/%{subver}/%{plugin}-%{subver}.tar.gz
-# Source0-md5:	99a8d76dc828f9f0b6bf4b91d7bb0ab2
-Patch0:		confdir.patch
+# Source0-md5:	9a75af351d1d2352d7903c57a3c2f82e
 URL:		https://www.dokuwiki.org/plugin:redirect
 BuildRequires:	rpm-php-pearprov >= 4.4.2-11
 BuildRequires:	rpmbuild(macros) >= 1.520
@@ -33,7 +32,6 @@ central configuration file.
 %prep
 %setup -qc
 mv *-%{plugin}-*/* .
-%patch0 -p1
 
 %build
 version=$(awk '/^date/{print $2}' plugin.info.txt)
