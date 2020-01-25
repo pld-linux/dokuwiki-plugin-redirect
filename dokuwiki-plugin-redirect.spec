@@ -2,7 +2,6 @@
 %define		ver		%(echo %{subver} | tr -d -)
 %define		plugin		redirect
 %define		php_min_version 5.3.0
-%include	/usr/lib/rpm/macros.php
 Summary:	DokuWiki redirect plugin
 Name:		dokuwiki-plugin-%{plugin}
 Version:	%{ver}
